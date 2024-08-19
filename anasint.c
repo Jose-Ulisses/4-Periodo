@@ -8,8 +8,9 @@ void T();
 void T_linha();
 void F();
 
-void erro(){
-    printf("ERRO SINTATICO\n");
+void erro_sint()
+{
+    printf("Erro sintatico\n");
     exit(1);
 }
 
@@ -18,7 +19,7 @@ void consumir(int t)
     if (token == t)
         token = analex();
     else
-        erro();
+        erro_sint();
 }
 
 void E()
@@ -89,6 +90,7 @@ void F()
         break;
 
     default:
+        erro_sint();
         break;
     }
 }

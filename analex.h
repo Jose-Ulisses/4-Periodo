@@ -41,4 +41,5 @@ int analex(){
     }
     
     printf("ERRO LEXICO na linha X !!!\n");
+    exit(1);
 }
