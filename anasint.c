@@ -8,8 +8,7 @@ void T();
 void T_linha();
 void F();
 
-void erro_sint()
-{
+void erro_sint(){
     printf("Erro sintatico\n");
     exit(1);
 }
@@ -17,9 +16,14 @@ void erro_sint()
 void consumir(int t)
 {
     if (token == t)
+    {
+        printf("\npassou\n");
         token = analex();
-    else
+    }
+    else{
+        printf("\nErro no Consumir\n");
         erro_sint();
+    }
 }
 
 void E()
@@ -90,17 +94,22 @@ void F()
         break;
 
     default:
-        erro_sint();
         break;
     }
 }
 
 int main(){
     token = analex();
+    printf("\n%d\n", token);
     E();
     if(token == ';')
         printf("Sem erros sintaticos");
-    else
+    else{
+        printf("\nErro na main!");
         erro_sint();
+    }
+
+
+
     return 0;
 }

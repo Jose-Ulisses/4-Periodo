@@ -12,6 +12,7 @@ int tokenval;
 int analex(){
     char ch;
 
+    fflush(stdin);
     ch = getchar();
 
     if(ch == '+')
@@ -36,10 +37,9 @@ int analex(){
         return ';';
 
     if(isdigit(ch)){
-        tokenval = ch - '0';
         return NUM;
     }
     
-    printf("ERRO LEXICO na linha X !!!\n");
+    printf("Erro lexico!\n");
     exit(1);
 }
