@@ -1,4 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "analex.h"
+#include "pilha.h"
 
 int token;
 
@@ -17,12 +20,11 @@ void consumir(int t)
 {
     if (token == t)
     {
-        printf("\npassou\n");
         token = analex();
     }
     else{
-        printf("\nErro no Consumir\n");
-        erro_sint();
+        printf("\nErro ao consumir\n");
+       exit(-1);
     }
 }
 
@@ -37,18 +39,21 @@ void E_linha()
     switch (token)
     {
     case '+':
+        push(token);
         consumir('+');
         T();
         E_linha();
         break;
 
     case '-':
+        push(token);
         consumir('-');
         T();
         E_linha();
         break;
 
     default:
+        //printf("\ndefault da E_linha!!\n");
         break;
     }
 }
@@ -59,57 +64,80 @@ void T()
     T_linha();
 }
 
-
 void T_linha()
 {
     switch (token)
     {
     case '*':
+        push(token);
         consumir('*');
         F();
         T_linha();
         break;
 
     case '/':
+        push(token);
         consumir('/');
         F();
         T_linha();
     default:
+        //printf("\ndefault da T_linha!\n");
         break;
     }
 }
 
 void F()
 {
-    switch (token)
-    {
-    case NUM:
-        consumir(NUM);
-        break;
-
-    case '(':
+    if(token >= 48 && token <=57){
+        push(token);
+        consumir(token);
+    }
+    if(token == '('){
+        push(token);
         consumir('(');
         E();
         consumir(')');
-        break;
-
-    default:
-        break;
     }
 }
 
 int main(){
+    int a, b, op, res;
+
+    push('!');
     token = analex();
-    printf("\n%d\n", token);
     E();
+    pop();
+    b = pop() - '0';
+    op = pop();
+    a = pop() - '0';
+
+    switch(op){
+        case '+':
+            res = a + b;
+            break;
+
+        case '-':
+            res = a - b;
+            break;
+
+        case '*':
+            res = a * b;
+            break;
+
+        case '/':
+            if(b == 0)
+                printf("\nimpossivel realizar divisao por zero!\n");
+                exit(-1);
+            res = a / b;
+            break;
+    }
+
     if(token == ';')
-        printf("Sem erros sintaticos");
+        printf("\nSem erros sintaticos");
     else{
         printf("\nErro na main!");
         erro_sint();
     }
-
-
-
+    printf("O resultado da operacao %d %c %d = %d", a, op, b, res);
     return 0;
 }

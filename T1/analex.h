@@ -37,9 +37,10 @@ int analex(){
         return ';';
 
     if(isdigit(ch)){
-        return NUM;
+        //ch = ch - '0';
+        return ch;
     }
-    
+
     printf("Erro lexico!\n");
     exit(1);
 }
