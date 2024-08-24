@@ -2,7 +2,7 @@
 
 int Pilha[MAX];
 int tam = 0;
-int a;
+int a, b, c, d, e;
 void push(char valor){
 	Pilha[tam++] = valor;
 }

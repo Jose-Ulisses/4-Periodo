@@ -8,12 +8,18 @@
 #define PRINT 269
 
 int tokenval;
+int linha = 1;
 
 int analex(){
-    char ch;
-
-    fflush(stdin);
+    int ch;
     ch = getchar();
+
+    while(ch == ' ' || ch == '\t' || ch == '\n')
+    {
+        if(ch == '\n')
+            linha++;
+        ch = getchar();
+    }
 
     if(ch == '+')
         return '+';
@@ -37,10 +43,17 @@ int analex(){
         return ';';
 
     if(isdigit(ch)){
-        //ch = ch - '0';
-        return ch;
+        tokenval = ch - '0';
+        ch = getchar();
+
+        while(isdigit(ch)){
+            tokenval = tokenval * 10 + ch - '0';
+            ch = getchar();
+        }
+        ungetc(ch, stdin);
+        return NUM;
     }
 
-    printf("Erro lexico!\n");
+    printf("Erro lexico na linha %d\n", linha);
     exit(1);
 }
