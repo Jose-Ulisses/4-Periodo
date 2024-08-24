@@ -4,7 +4,6 @@
 #include "pilha.h"
 
 int token;
-int res;
 
 void E();
 void E_linha();
