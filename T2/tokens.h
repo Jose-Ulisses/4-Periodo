@@ -1,0 +1,14 @@
+#define IF 256
+#define FOR 257
+#define WHILE 258
+#define AND 259
+#define OR 260 
+#define EQ 261
+#define LT 262
+#define LE 263
+#define GT 264
+#define GE 265
+#define NUM 266
+#define ID 267
+#define INT 268
+#define FLOAT 269

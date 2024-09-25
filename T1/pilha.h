@@ -2,16 +2,12 @@
 
 int Pilha[MAX];
 int tam = 0;
-int a, b, c, d, e;
+int a, b;
+
 void push(int valor){
 	Pilha[tam++] = valor;
 }
 
-char pop(){
-	return Pilha[tam--];
+int pop(){
+	return Pilha[--tam];
 }
-
-int topo(){
-    return Pilha[tam-1];
-}
-

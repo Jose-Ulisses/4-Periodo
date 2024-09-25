@@ -5,10 +5,15 @@
 #define NUM 256
 #define ID 257
 #define QUIT 258
-#define PRINT 269
+#define PRINT 259
 
 int tokenval;
 int linha = 1;
+
+void erro_lex(int linha){
+    printf("ERRO LEXICO NA LINHA %d\n", linha);
+    exit(1);
+}
 
 int analex(){
     int ch;
@@ -53,7 +58,5 @@ int analex(){
         ungetc(ch, stdin);
         return NUM;
     }
-
-    printf("Erro lexico na linha %d\n", linha);
-    exit(1);
+    erro_lex(linha);
 }
