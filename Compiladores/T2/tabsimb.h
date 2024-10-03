@@ -1,8 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-
 #define MAX 1000
-
 
 struct symbol{
     char lexema[50];
@@ -16,7 +14,7 @@ struct symbol Tabela[MAX];
 
 int procura(char *lexema){
     int i;
-
+    
     for (i = 0; i < tam_tab; i++)
         if(strcmp(Tabela[i].lexema, lexema) == 0)
             return i;
