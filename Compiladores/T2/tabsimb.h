@@ -22,7 +22,7 @@ int procura(char *lexema){
     return -1;
 }
 
-int insere(char *lexema){
+int insere(char *lexema){        
     int onde_existe = procura(lexema);
     int existe_na_tabela = 1;
     
@@ -49,8 +49,8 @@ char *get_lexema(int pos){
 
 void imprime(){
     int i;
-    printf("\nTabela de simbolos\n");
+    printf("\nTABELA DE SIMBOlOS\n");
 
     for(i = 0; i < tam_tab; i++)
-        printf("%d - %s", i, Tabela[i].lexema);
+        printf("%d - %s\n", i, Tabela[i].lexema);
 }

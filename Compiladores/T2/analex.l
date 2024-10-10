@@ -4,32 +4,61 @@
     #include "tabsimb.h"
     int nline = 1;
 %}
-/* Expressoes Regulares Simples */
 
 dig [0-9]
-digs [1-9]
 letra [a-zA-Z]
 
 %%
-/* Definicoes tokens(regras) */
-
 "==" {return EQ;}
+">" {return GT;}
 ">=" {return GE;}
+"<" {return LT;}
+"<=" {return LE;}
+"=" {return ATR;}
+"(" {return OPAR;}
+")" {return CPAR;}
+";" {return PV;}
+"{" {return OKEY;}
+"}" {return CKEY;}
+"," {return VIR;}
+"||" {return OR;}
+"!" {return NOT;}
+"&&" {return AND;}
+"*" {return MULT;}
+"[" {return OB;}
+"]" {return CB;}
+    
+"while" {return WHILE;}
+"return" {return RTRN;}
 "if" {return IF;}
+"else" {return ELSE;}
+"for" {return FOR;}
 "int" {return INT;}
 "float" {return FLOAT;}
-{digs}{dig}+|0 {return NUM;}
-{letra}({dig}|{letra})* {insere(yytext);return ID;}
+"+" {return PLUS;}
+"-" {return MINUS;}
 
+{"}({letra}|dig)+{"} {PRINT}
+{dig}+("."{dig}+)? {return NUM;}
+{letra}({letra}|{dig}|"_")* {insere(yytext);return ID;}
+
+[ \t\r] { }
+\n  { nline++; }
+.   {printf("erro lexico na linha %d - %s\n", 
+             nline, yytext);}
 %%
-/* Funcoes */
+#ifndef yywrap
+int yywrap() {return 1; }
+#endif
 
-int main(int argc, char **argv){
+void main(int argc, char **argv){
     int token, i = 1;
-    yyin = fopen(argv[1], "r";)
+    yyin = fopen(argv[1],"r");
     token = yylex();
-
-    while(token){
+    
+    while(token){   
+        printf("%d) %d %s\n", i++, token, yytext);
         token = yylex();
     }
-}
+    imprime();
+}   
