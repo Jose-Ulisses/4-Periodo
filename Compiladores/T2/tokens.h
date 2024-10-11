@@ -31,3 +31,6 @@
 #define QUOTE 286
 #define INVSLASH 287
 #define MULT 288
+#define STRING 289
+#define VOID 290
+#define CHAR 291

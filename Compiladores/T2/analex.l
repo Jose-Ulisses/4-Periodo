@@ -9,6 +9,10 @@ dig [0-9]
 letra [a-zA-Z]
 
 %%
+"//".* {}
+"/*"([^*]|\*[^/])*"*/" {}
+\"[^\"]*\" {return STRING;}
+
 "==" {return EQ;}
 ">" {return GT;}
 ">=" {return GE;}
@@ -25,9 +29,9 @@ letra [a-zA-Z]
 "!" {return NOT;}
 "&&" {return AND;}
 "*" {return MULT;}
-"[" {return OB;}
-"]" {return CB;}
-    
+"+" {return PLUS;}
+"-" {return MINUS;}
+
 "while" {return WHILE;}
 "return" {return RTRN;}
 "if" {return IF;}
@@ -35,10 +39,9 @@ letra [a-zA-Z]
 "for" {return FOR;}
 "int" {return INT;}
 "float" {return FLOAT;}
-"+" {return PLUS;}
-"-" {return MINUS;}
+"char" {return CHAR;}
+"void" {return VOID;}
 
-{"}({letra}|dig)+{"} {PRINT}
 {dig}+("."{dig}+)? {return NUM;}
 {letra}({letra}|{dig}|"_")* {insere(yytext);return ID;}
 
@@ -46,6 +49,7 @@ letra [a-zA-Z]
 \n  { nline++; }
 .   {printf("erro lexico na linha %d - %s\n", 
              nline, yytext);}
+
 %%
 #ifndef yywrap
 int yywrap() {return 1; }

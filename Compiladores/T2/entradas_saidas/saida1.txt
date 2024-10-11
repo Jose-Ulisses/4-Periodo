@@ -5,7 +5,7 @@
 5) 268 int
 6) 267 aux
 7) 275 ,
-8) 267 count
+8) 267 cont
 9) 275 ,
 10) 267 a
 11) 274 ;
@@ -43,9 +43,9 @@
 43) 274 ;
 44) 273 }
 
-Tabela de simbolos
+TABELA DE SIMBOlOS
 0 - main
 1 - aux
-2 - count
+2 - cont
 3 - a
 4 - teste
