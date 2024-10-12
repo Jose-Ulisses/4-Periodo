@@ -27,7 +27,7 @@
 27) 273 }
 28) 273 }
 
-TABELA DE SIMBOlOS
+TABELA DE SIMBOLOS
 0 - def
 1 - func
 2 - b

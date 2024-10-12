@@ -23,7 +23,7 @@ erro lexico na linha 4 - ~
 22) 273 }
 23) 273 }
 
-TABELA DE SIMBOlOS
+TABELA DE SIMBOLOS
 0 - main
 1 - x
 2 - y

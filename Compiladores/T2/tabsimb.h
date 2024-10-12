@@ -49,7 +49,7 @@ char *get_lexema(int pos){
 
 void imprime(){
     int i;
-    printf("\nTABELA DE SIMBOlOS\n");
+    printf("\nTABELA DE SIMBOLOS\n");
 
     for(i = 0; i < tam_tab; i++)
         printf("%d - %s\n", i, Tabela[i].lexema);
