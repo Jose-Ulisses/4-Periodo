@@ -118,7 +118,6 @@ Exp:
     |Exp '/' Exp
     |Exp '&' '&' Exp
     |Exp '|' '|' Exp
-    |'!' Exp
     
     |Exp '>' Exp
     |Exp '<' Exp
