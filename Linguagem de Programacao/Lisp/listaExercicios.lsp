@@ -56,7 +56,8 @@
   )
 )
 
-;Exercicio 5 
+;Exercicio 5
+
 (defun concatena_listas (lst_a lst_b)
   (if (null lst_b)
     lst_a
