@@ -112,12 +112,12 @@ Atr:
     ;
 
 Exp: 
-     Exp '+' Exp
-    |Exp '-' Exp
-    |Exp '*' Exp
-    |Exp '/' Exp
-    |Exp '&' '&' Exp
-    |Exp '|' '|' Exp
+     Exp '+' Exp        {$$ = $1 + $2;}
+    |Exp '-' Exp        {$$ = $1 - $2;}
+    |Exp '*' Exp        {$$ = $1 * $2;}
+    |Exp '/' Exp        {$$ = $1 / $2;}
+    |Exp '&' '&' Exp    {$$ = $1 * $2;}
+    |Exp '|' '|' Exp    {$$ = $1 + $2;}
     
     |Exp '>' Exp
     |Exp '<' Exp
@@ -126,10 +126,10 @@ Exp:
     |Exp  '=' '=' Exp
     |Exp '!' '=' Exp
     
-    |'(' Exp ')'
-    |NUM
-    |ID
-    |ID '[' NUM ']' 
+    |'(' Exp ')'        {$$ = $2;}
+    |NUM                {$$ = yylval;}
+    |ID                 {$$ = yytext;}
+    |ID '[' NUM ']'     {$$ = yytext;}
     |FunkCall
     ;
 %%
