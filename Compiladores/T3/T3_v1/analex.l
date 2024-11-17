@@ -2,8 +2,9 @@
     #include <stdio.h>
     #include "sint.h"
     #include "tabsimb.h"
+
     int nline = 1;
-    int yyerror(char *s){
+    void yyerror(char *s){
         fprintf("%s na linha %d", s, nline);
     }
 %}
@@ -21,6 +22,7 @@ letra [a-zA-Z]
 ">=" {return GE;}
 "<" {return LT;}
 "<=" {return LE;}
+"!=" {return NEQ;}
 "=" {return ATR;}
 "(" {return OPAR;}
 ")" {return CPAR;}
@@ -38,7 +40,7 @@ letra [a-zA-Z]
 "while" {return WHILE;}
 "return" {return RTRN;}
 "if" {return IF;}
-"endif" {reeturn ENDIF;}
+"endif" {return ENDIF;}
 "else" {return ELSE;}
 "for" {return FOR;}
 "int" {return INT;}
@@ -46,13 +48,12 @@ letra [a-zA-Z]
 "char" {return CHAR;}
 "void" {return VOID;}
 
-{dig}+("."{dig}+)? {return NUM;}
-{letra}({letra}|{dig}|"_")* {insere(yytext);return ID;}
+{dig}+("."{dig}+)? {yylval = atoi(yytext); return NUM;}
+{letra}({letra}|{dig}|"_")* {insere(yytext); return ID;}
 
 [ \t\r] { }
 \n  { nline++; }
-.   {printf("erro lexico na linha %d - %s\n", 
-             nline, yytext);}
+.   {printf("erro lexico na linha %d - %s\n", nline, yytext);}
 
 %%
 #ifndef yywrap

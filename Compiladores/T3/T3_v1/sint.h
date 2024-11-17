@@ -57,39 +57,41 @@ extern int yydebug;
     NUM = 258,                     /* NUM  */
     ID = 259,                      /* ID  */
     IF = 260,                      /* IF  */
-    FOR = 261,                     /* FOR  */
-    WHILE = 262,                   /* WHILE  */
-    AND = 263,                     /* AND  */
-    OR = 264,                      /* OR  */
-    EQ = 265,                      /* EQ  */
-    LT = 266,                      /* LT  */
-    LE = 267,                      /* LE  */
-    GT = 268,                      /* GT  */
-    GE = 269,                      /* GE  */
-    INT = 270,                     /* INT  */
-    FLOAT = 271,                   /* FLOAT  */
-    OPAR = 272,                    /* OPAR  */
-    CPAR = 273,                    /* CPAR  */
-    OKEY = 274,                    /* OKEY  */
-    CKEY = 275,                    /* CKEY  */
-    PV = 276,                      /* PV  */
-    VIR = 277,                     /* VIR  */
-    ATR = 278,                     /* ATR  */
-    ELSE = 279,                    /* ELSE  */
-    PLUS = 280,                    /* PLUS  */
-    MINUS = 281,                   /* MINUS  */
-    RTRN = 282,                    /* RTRN  */
-    NOT = 283,                     /* NOT  */
-    PER = 284,                     /* PER  */
-    AST = 285,                     /* AST  */
-    OB = 286,                      /* OB  */
-    CB = 287,                      /* CB  */
-    QUOTE = 288,                   /* QUOTE  */
-    INVSLASH = 289,                /* INVSLASH  */
-    MULT = 290,                    /* MULT  */
-    STRING = 291,                  /* STRING  */
-    VOID = 292,                    /* VOID  */
-    CHAR = 293                     /* CHAR  */
+    ENDIF = 261,                   /* ENDIF  */
+    FOR = 262,                     /* FOR  */
+    WHILE = 263,                   /* WHILE  */
+    AND = 264,                     /* AND  */
+    OR = 265,                      /* OR  */
+    EQ = 266,                      /* EQ  */
+    LT = 267,                      /* LT  */
+    LE = 268,                      /* LE  */
+    GT = 269,                      /* GT  */
+    GE = 270,                      /* GE  */
+    NEQ = 271,                     /* NEQ  */
+    INT = 272,                     /* INT  */
+    FLOAT = 273,                   /* FLOAT  */
+    OPAR = 274,                    /* OPAR  */
+    CPAR = 275,                    /* CPAR  */
+    OKEY = 276,                    /* OKEY  */
+    CKEY = 277,                    /* CKEY  */
+    PV = 278,                      /* PV  */
+    VIR = 279,                     /* VIR  */
+    ATR = 280,                     /* ATR  */
+    ELSE = 281,                    /* ELSE  */
+    PLUS = 282,                    /* PLUS  */
+    MINUS = 283,                   /* MINUS  */
+    RTRN = 284,                    /* RTRN  */
+    NOT = 285,                     /* NOT  */
+    PER = 286,                     /* PER  */
+    AST = 287,                     /* AST  */
+    OB = 288,                      /* OB  */
+    CB = 289,                      /* CB  */
+    QUOTE = 290,                   /* QUOTE  */
+    INVSLASH = 291,                /* INVSLASH  */
+    MULT = 292,                    /* MULT  */
+    STRING = 293,                  /* STRING  */
+    VOID = 294,                    /* VOID  */
+    CHAR = 295                     /* CHAR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -101,39 +103,41 @@ extern int yydebug;
 #define NUM 258
 #define ID 259
 #define IF 260
-#define FOR 261
-#define WHILE 262
-#define AND 263
-#define OR 264
-#define EQ 265
-#define LT 266
-#define LE 267
-#define GT 268
-#define GE 269
-#define INT 270
-#define FLOAT 271
-#define OPAR 272
-#define CPAR 273
-#define OKEY 274
-#define CKEY 275
-#define PV 276
-#define VIR 277
-#define ATR 278
-#define ELSE 279
-#define PLUS 280
-#define MINUS 281
-#define RTRN 282
-#define NOT 283
-#define PER 284
-#define AST 285
-#define OB 286
-#define CB 287
-#define QUOTE 288
-#define INVSLASH 289
-#define MULT 290
-#define STRING 291
-#define VOID 292
-#define CHAR 293
+#define ENDIF 261
+#define FOR 262
+#define WHILE 263
+#define AND 264
+#define OR 265
+#define EQ 266
+#define LT 267
+#define LE 268
+#define GT 269
+#define GE 270
+#define NEQ 271
+#define INT 272
+#define FLOAT 273
+#define OPAR 274
+#define CPAR 275
+#define OKEY 276
+#define CKEY 277
+#define PV 278
+#define VIR 279
+#define ATR 280
+#define ELSE 281
+#define PLUS 282
+#define MINUS 283
+#define RTRN 284
+#define NOT 285
+#define PER 286
+#define AST 287
+#define OB 288
+#define CB 289
+#define QUOTE 290
+#define INVSLASH 291
+#define MULT 292
+#define STRING 293
+#define VOID 294
+#define CHAR 295
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
