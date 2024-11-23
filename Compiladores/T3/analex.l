@@ -4,15 +4,17 @@
     #include "tabsimb.h"
 
     int nline = 1;
-    void yyerror(char *s){
-        fprintf("%s na linha %d", s, nline);
-    }
+    int yyerror(char *s){
+        printf("%s na linha %d\n", s, nline);
+}
+
 %}
 
 dig [0-9]
 letra [a-zA-Z]
 
 %%
+\"{letra}\" {return ARG_ARQ;}
 "//".* {}
 "/*"([^*]|\*[^/])*"*/" {}
 \"[^\"]*\" {return STRING;}
@@ -29,6 +31,8 @@ letra [a-zA-Z]
 ";" {return PV;}
 "{" {return OKEY;}
 "}" {return CKEY;}
+"[" {return OB;}
+"]" {return CB;}
 "," {return VIR;}
 "||" {return OR;}
 "!" {return NOT;}
@@ -38,7 +42,7 @@ letra [a-zA-Z]
 "-" {return MINUS;}
 
 "while" {return WHILE;}
-"return" {return RTRN;}
+"return" {return RETURN;}
 "if" {return IF;}
 "endif" {return ENDIF;}
 "else" {return ELSE;}
@@ -52,11 +56,10 @@ letra [a-zA-Z]
 {letra}({letra}|{dig}|"_")* {insere(yytext); return ID;}
 
 [ \t\r] { }
-\n  { nline++; }
+\n  { nline = nline + 1; }
 .   {printf("erro lexico na linha %d - %s\n", nline, yytext);}
 
 %%
 #ifndef yywrap
 int yywrap() {return 1; }
 #endif
-   

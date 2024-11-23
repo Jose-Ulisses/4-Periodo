@@ -1,0 +1,1747 @@
+Terminais sem uso na gramática
+
+    RTRN
+    NOT
+    PER
+    AST
+    QUOTE
+    INVSLASH
+    MULT
+    STRING
+
+
+Estado 51 conflitos: 1 de deslocamento/redução
+
+
+Gramática
+
+    0 $accept: ProgL $end
+
+    1 ProgL: Prog
+
+    2 Prog: ListaFunc
+
+    3 Decl: Tipo ListaID
+    4     | Tipo Atr PV
+
+    5 Tipo: INT
+    6     | FLOAT
+    7     | VOID
+    8     | CHAR
+
+    9 ListaID: ID VIR ListaID
+   10        | ID
+   11        | Atr VIR ListaID
+   12        | Atr
+
+   13 Exp: Exp PLUS Exp
+   14    | Exp MINUS Exp
+   15    | Exp AND Exp
+   16    | Exp OR Exp
+   17    | Exp GT Exp
+   18    | Exp LT Exp
+   19    | Exp LE Exp
+   20    | Exp GE Exp
+   21    | Exp EQ Exp
+   22    | Exp NEQ Exp
+   23    | OPAR Exp CPAR
+   24    | NUM
+   25    | ID
+   26    | ID OB NUM CB
+   27    | FuncCall PV
+
+   28 Atr: ID ATR Exp
+   29    | ID OB NUM CB ATR Exp
+
+   30 ListaExp: Exp VIR ListaExp
+   31         | Exp
+
+   32 Wst: WHILE OPAR Exp CPAR ComandoComposto
+
+   33 Fst: FOR OPAR ID VIR Exp VIR Exp CPAR
+
+   34 Ifst: IF OPAR Exp CPAR ComandoComposto ENDIF
+   35     | IF OPAR Exp CPAR ComandoComposto ELSE ComandoComposto ENDIF
+
+   36 ListaComando: Comando ListaComando
+   37             | Comando
+
+   38 Comando: Exp PV
+   39        | Decl PV
+   40        | Atr PV
+   41        | Wst
+   42        | Fst
+   43        | Ifst
+   44        | FuncCall PV
+
+   45 ComandoComposto: Comando
+   46                | OKEY ListaComando CKEY
+
+   47 FuncCall: ID OPAR ListaExp CPAR ID OPAR CPAR
+
+   48 FuncStm: DeclFunc OPAR CPAR OKEY ListaComando CKEY
+   49        | DeclFunc OPAR ListaDeclFunc CPAR OKEY ListaComando CKEY
+
+   50 DeclFunc: Tipo ID
+
+   51 ListaDeclFunc: DeclFunc VIR ListaDeclFunc
+   52              | DeclFunc
+
+   53 ListaFunc: FuncStm ListaDeclFunc
+   54          | FuncStm
+
+
+Terminais, com as regras onde eles aparecem
+
+    $end (0) 0
+    error (256)
+    NUM (258) 24 26 29
+    ID (259) 9 10 25 26 28 29 33 47 50
+    IF (260) 34 35
+    ENDIF (261) 34 35
+    FOR (262) 33
+    WHILE (263) 32
+    AND (264) 15
+    OR (265) 16
+    EQ (266) 21
+    LT (267) 18
+    LE (268) 19
+    GT (269) 17
+    GE (270) 20
+    NEQ (271) 22
+    INT (272) 5
+    FLOAT (273) 6
+    OPAR (274) 23 32 33 34 35 47 48 49
+    CPAR (275) 23 32 33 34 35 47 48 49
+    OKEY (276) 46 48 49
+    CKEY (277) 46 48 49
+    PV (278) 4 27 38 39 40 44
+    VIR (279) 9 11 30 33 51
+    ATR (280) 28 29
+    ELSE (281) 35
+    PLUS (282) 13
+    MINUS (283) 14
+    RTRN (284)
+    NOT (285)
+    PER (286)
+    AST (287)
+    OB (288) 26 29
+    CB (289) 26 29
+    QUOTE (290)
+    INVSLASH (291)
+    MULT (292)
+    STRING (293)
+    VOID (294) 7
+    CHAR (295) 8
+
+
+Não terminais com as regras onde eles aparecem
+
+    $accept (41)
+        à esquerda: 0
+    ProgL (42)
+        à esquerda: 1
+        à direita: 0
+    Prog (43)
+        à esquerda: 2
+        à direita: 1
+    Decl (44)
+        à esquerda: 3 4
+        à direita: 39
+    Tipo (45)
+        à esquerda: 5 6 7 8
+        à direita: 3 4 50
+    ListaID (46)
+        à esquerda: 9 10 11 12
+        à direita: 3 9 11
+    Exp (47)
+        à esquerda: 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+        à direita: 13 14 15 16 17 18 19 20 21 22 23 28 29 30 31 32 33 34 35 38
+    Atr (48)
+        à esquerda: 28 29
+        à direita: 4 11 12 40
+    ListaExp (49)
+        à esquerda: 30 31
+        à direita: 30 47
+    Wst (50)
+        à esquerda: 32
+        à direita: 41
+    Fst (51)
+        à esquerda: 33
+        à direita: 42
+    Ifst (52)
+        à esquerda: 34 35
+        à direita: 43
+    ListaComando (53)
+        à esquerda: 36 37
+        à direita: 36 46 48 49
+    Comando (54)
+        à esquerda: 38 39 40 41 42 43 44
+        à direita: 36 37 45
+    ComandoComposto (55)
+        à esquerda: 45 46
+        à direita: 32 34 35
+    FuncCall (56)
+        à esquerda: 47
+        à direita: 27 44
+    FuncStm (57)
+        à esquerda: 48 49
+        à direita: 53 54
+    DeclFunc (58)
+        à esquerda: 50
+        à direita: 48 49 51 52
+    ListaDeclFunc (59)
+        à esquerda: 51 52
+        à direita: 49 51 53
+    ListaFunc (60)
+        à esquerda: 53 54
+        à direita: 2
+
+
+Estado 0
+
+    0 $accept: • ProgL $end
+
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    ProgL      ir ao estado 5
+    Prog       ir ao estado 6
+    Tipo       ir ao estado 7
+    FuncStm    ir ao estado 8
+    DeclFunc   ir ao estado 9
+    ListaFunc  ir ao estado 10
+
+
+Estado 1
+
+    5 Tipo: INT •
+
+    $padrão  reduzir usando a regra 5 (Tipo)
+
+
+Estado 2
+
+    6 Tipo: FLOAT •
+
+    $padrão  reduzir usando a regra 6 (Tipo)
+
+
+Estado 3
+
+    7 Tipo: VOID •
+
+    $padrão  reduzir usando a regra 7 (Tipo)
+
+
+Estado 4
+
+    8 Tipo: CHAR •
+
+    $padrão  reduzir usando a regra 8 (Tipo)
+
+
+Estado 5
+
+    0 $accept: ProgL • $end
+
+    $end  deslocar, e ir ao estado 11
+
+
+Estado 6
+
+    1 ProgL: Prog •
+
+    $padrão  reduzir usando a regra 1 (ProgL)
+
+
+Estado 7
+
+   50 DeclFunc: Tipo • ID
+
+    ID  deslocar, e ir ao estado 12
+
+
+Estado 8
+
+   53 ListaFunc: FuncStm • ListaDeclFunc
+   54          | FuncStm •
+
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    $padrão  reduzir usando a regra 54 (ListaFunc)
+
+    Tipo           ir ao estado 7
+    DeclFunc       ir ao estado 13
+    ListaDeclFunc  ir ao estado 14
+
+
+Estado 9
+
+   48 FuncStm: DeclFunc • OPAR CPAR OKEY ListaComando CKEY
+   49        | DeclFunc • OPAR ListaDeclFunc CPAR OKEY ListaComando CKEY
+
+    OPAR  deslocar, e ir ao estado 15
+
+
+Estado 10
+
+    2 Prog: ListaFunc •
+
+    $padrão  reduzir usando a regra 2 (Prog)
+
+
+Estado 11
+
+    0 $accept: ProgL $end •
+
+    $padrão  aceitar
+
+
+Estado 12
+
+   50 DeclFunc: Tipo ID •
+
+    $padrão  reduzir usando a regra 50 (DeclFunc)
+
+
+Estado 13
+
+   51 ListaDeclFunc: DeclFunc • VIR ListaDeclFunc
+   52              | DeclFunc •
+
+    VIR  deslocar, e ir ao estado 16
+
+    $padrão  reduzir usando a regra 52 (ListaDeclFunc)
+
+
+Estado 14
+
+   53 ListaFunc: FuncStm ListaDeclFunc •
+
+    $padrão  reduzir usando a regra 53 (ListaFunc)
+
+
+Estado 15
+
+   48 FuncStm: DeclFunc OPAR • CPAR OKEY ListaComando CKEY
+   49        | DeclFunc OPAR • ListaDeclFunc CPAR OKEY ListaComando CKEY
+
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    CPAR   deslocar, e ir ao estado 17
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Tipo           ir ao estado 7
+    DeclFunc       ir ao estado 13
+    ListaDeclFunc  ir ao estado 18
+
+
+Estado 16
+
+   51 ListaDeclFunc: DeclFunc VIR • ListaDeclFunc
+
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Tipo           ir ao estado 7
+    DeclFunc       ir ao estado 13
+    ListaDeclFunc  ir ao estado 19
+
+
+Estado 17
+
+   48 FuncStm: DeclFunc OPAR CPAR • OKEY ListaComando CKEY
+
+    OKEY  deslocar, e ir ao estado 20
+
+
+Estado 18
+
+   49 FuncStm: DeclFunc OPAR ListaDeclFunc • CPAR OKEY ListaComando CKEY
+
+    CPAR  deslocar, e ir ao estado 21
+
+
+Estado 19
+
+   51 ListaDeclFunc: DeclFunc VIR ListaDeclFunc •
+
+    $padrão  reduzir usando a regra 51 (ListaDeclFunc)
+
+
+Estado 20
+
+   48 FuncStm: DeclFunc OPAR CPAR OKEY • ListaComando CKEY
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl          ir ao estado 28
+    Tipo          ir ao estado 29
+    Exp           ir ao estado 30
+    Atr           ir ao estado 31
+    Wst           ir ao estado 32
+    Fst           ir ao estado 33
+    Ifst          ir ao estado 34
+    ListaComando  ir ao estado 35
+    Comando       ir ao estado 36
+    FuncCall      ir ao estado 37
+
+
+Estado 21
+
+   49 FuncStm: DeclFunc OPAR ListaDeclFunc CPAR • OKEY ListaComando CKEY
+
+    OKEY  deslocar, e ir ao estado 38
+
+
+Estado 22
+
+   24 Exp: NUM •
+
+    $padrão  reduzir usando a regra 24 (Exp)
+
+
+Estado 23
+
+   25 Exp: ID •
+   26    | ID • OB NUM CB
+   28 Atr: ID • ATR Exp
+   29    | ID • OB NUM CB ATR Exp
+   47 FuncCall: ID • OPAR ListaExp CPAR ID OPAR CPAR
+
+    OPAR  deslocar, e ir ao estado 39
+    ATR   deslocar, e ir ao estado 40
+    OB    deslocar, e ir ao estado 41
+
+    $padrão  reduzir usando a regra 25 (Exp)
+
+
+Estado 24
+
+   34 Ifst: IF • OPAR Exp CPAR ComandoComposto ENDIF
+   35     | IF • OPAR Exp CPAR ComandoComposto ELSE ComandoComposto ENDIF
+
+    OPAR  deslocar, e ir ao estado 42
+
+
+Estado 25
+
+   33 Fst: FOR • OPAR ID VIR Exp VIR Exp CPAR
+
+    OPAR  deslocar, e ir ao estado 43
+
+
+Estado 26
+
+   32 Wst: WHILE • OPAR Exp CPAR ComandoComposto
+
+    OPAR  deslocar, e ir ao estado 44
+
+
+Estado 27
+
+   23 Exp: OPAR • Exp CPAR
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 46
+    FuncCall  ir ao estado 47
+
+
+Estado 28
+
+   39 Comando: Decl • PV
+
+    PV  deslocar, e ir ao estado 48
+
+
+Estado 29
+
+    3 Decl: Tipo • ListaID
+    4     | Tipo • Atr PV
+
+    ID  deslocar, e ir ao estado 49
+
+    ListaID  ir ao estado 50
+    Atr      ir ao estado 51
+
+
+Estado 30
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   38 Comando: Exp • PV
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    PV     deslocar, e ir ao estado 60
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 31
+
+   40 Comando: Atr • PV
+
+    PV  deslocar, e ir ao estado 63
+
+
+Estado 32
+
+   41 Comando: Wst •
+
+    $padrão  reduzir usando a regra 41 (Comando)
+
+
+Estado 33
+
+   42 Comando: Fst •
+
+    $padrão  reduzir usando a regra 42 (Comando)
+
+
+Estado 34
+
+   43 Comando: Ifst •
+
+    $padrão  reduzir usando a regra 43 (Comando)
+
+
+Estado 35
+
+   48 FuncStm: DeclFunc OPAR CPAR OKEY ListaComando • CKEY
+
+    CKEY  deslocar, e ir ao estado 64
+
+
+Estado 36
+
+   36 ListaComando: Comando • ListaComando
+   37             | Comando •
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    $padrão  reduzir usando a regra 37 (ListaComando)
+
+    Decl          ir ao estado 28
+    Tipo          ir ao estado 29
+    Exp           ir ao estado 30
+    Atr           ir ao estado 31
+    Wst           ir ao estado 32
+    Fst           ir ao estado 33
+    Ifst          ir ao estado 34
+    ListaComando  ir ao estado 65
+    Comando       ir ao estado 36
+    FuncCall      ir ao estado 37
+
+
+Estado 37
+
+   27 Exp: FuncCall • PV
+   44 Comando: FuncCall • PV
+
+    PV  deslocar, e ir ao estado 66
+
+
+Estado 38
+
+   49 FuncStm: DeclFunc OPAR ListaDeclFunc CPAR OKEY • ListaComando CKEY
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl          ir ao estado 28
+    Tipo          ir ao estado 29
+    Exp           ir ao estado 30
+    Atr           ir ao estado 31
+    Wst           ir ao estado 32
+    Fst           ir ao estado 33
+    Ifst          ir ao estado 34
+    ListaComando  ir ao estado 67
+    Comando       ir ao estado 36
+    FuncCall      ir ao estado 37
+
+
+Estado 39
+
+   47 FuncCall: ID OPAR • ListaExp CPAR ID OPAR CPAR
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 68
+    ListaExp  ir ao estado 69
+    FuncCall  ir ao estado 47
+
+
+Estado 40
+
+   28 Atr: ID ATR • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 70
+    FuncCall  ir ao estado 47
+
+
+Estado 41
+
+   26 Exp: ID OB • NUM CB
+   29 Atr: ID OB • NUM CB ATR Exp
+
+    NUM  deslocar, e ir ao estado 71
+
+
+Estado 42
+
+   34 Ifst: IF OPAR • Exp CPAR ComandoComposto ENDIF
+   35     | IF OPAR • Exp CPAR ComandoComposto ELSE ComandoComposto ENDIF
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 72
+    FuncCall  ir ao estado 47
+
+
+Estado 43
+
+   33 Fst: FOR OPAR • ID VIR Exp VIR Exp CPAR
+
+    ID  deslocar, e ir ao estado 73
+
+
+Estado 44
+
+   32 Wst: WHILE OPAR • Exp CPAR ComandoComposto
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 74
+    FuncCall  ir ao estado 47
+
+
+Estado 45
+
+   25 Exp: ID •
+   26    | ID • OB NUM CB
+   47 FuncCall: ID • OPAR ListaExp CPAR ID OPAR CPAR
+
+    OPAR  deslocar, e ir ao estado 39
+    OB    deslocar, e ir ao estado 75
+
+    $padrão  reduzir usando a regra 25 (Exp)
+
+
+Estado 46
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   23    | OPAR Exp • CPAR
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    CPAR   deslocar, e ir ao estado 76
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 47
+
+   27 Exp: FuncCall • PV
+
+    PV  deslocar, e ir ao estado 77
+
+
+Estado 48
+
+   39 Comando: Decl PV •
+
+    $padrão  reduzir usando a regra 39 (Comando)
+
+
+Estado 49
+
+    9 ListaID: ID • VIR ListaID
+   10        | ID •
+   28 Atr: ID • ATR Exp
+   29    | ID • OB NUM CB ATR Exp
+
+    VIR  deslocar, e ir ao estado 78
+    ATR  deslocar, e ir ao estado 40
+    OB   deslocar, e ir ao estado 79
+
+    $padrão  reduzir usando a regra 10 (ListaID)
+
+
+Estado 50
+
+    3 Decl: Tipo ListaID •
+
+    $padrão  reduzir usando a regra 3 (Decl)
+
+
+Estado 51
+
+    4 Decl: Tipo Atr • PV
+   11 ListaID: Atr • VIR ListaID
+   12        | Atr •
+
+    PV   deslocar, e ir ao estado 80
+    VIR  deslocar, e ir ao estado 81
+
+    PV  [reduzir usando a regra 12 (ListaID)]
+
+
+Estado 52
+
+   15 Exp: Exp AND • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 82
+    FuncCall  ir ao estado 47
+
+
+Estado 53
+
+   16 Exp: Exp OR • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 83
+    FuncCall  ir ao estado 47
+
+
+Estado 54
+
+   21 Exp: Exp EQ • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 84
+    FuncCall  ir ao estado 47
+
+
+Estado 55
+
+   18 Exp: Exp LT • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 85
+    FuncCall  ir ao estado 47
+
+
+Estado 56
+
+   19 Exp: Exp LE • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 86
+    FuncCall  ir ao estado 47
+
+
+Estado 57
+
+   17 Exp: Exp GT • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 87
+    FuncCall  ir ao estado 47
+
+
+Estado 58
+
+   20 Exp: Exp GE • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 88
+    FuncCall  ir ao estado 47
+
+
+Estado 59
+
+   22 Exp: Exp NEQ • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 89
+    FuncCall  ir ao estado 47
+
+
+Estado 60
+
+   38 Comando: Exp PV •
+
+    $padrão  reduzir usando a regra 38 (Comando)
+
+
+Estado 61
+
+   13 Exp: Exp PLUS • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 90
+    FuncCall  ir ao estado 47
+
+
+Estado 62
+
+   14 Exp: Exp MINUS • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 91
+    FuncCall  ir ao estado 47
+
+
+Estado 63
+
+   40 Comando: Atr PV •
+
+    $padrão  reduzir usando a regra 40 (Comando)
+
+
+Estado 64
+
+   48 FuncStm: DeclFunc OPAR CPAR OKEY ListaComando CKEY •
+
+    $padrão  reduzir usando a regra 48 (FuncStm)
+
+
+Estado 65
+
+   36 ListaComando: Comando ListaComando •
+
+    $padrão  reduzir usando a regra 36 (ListaComando)
+
+
+Estado 66
+
+   27 Exp: FuncCall PV •
+   44 Comando: FuncCall PV •
+
+    AND      reduzir usando a regra 27 (Exp)
+    OR       reduzir usando a regra 27 (Exp)
+    EQ       reduzir usando a regra 27 (Exp)
+    LT       reduzir usando a regra 27 (Exp)
+    LE       reduzir usando a regra 27 (Exp)
+    GT       reduzir usando a regra 27 (Exp)
+    GE       reduzir usando a regra 27 (Exp)
+    NEQ      reduzir usando a regra 27 (Exp)
+    PV       reduzir usando a regra 27 (Exp)
+    PLUS     reduzir usando a regra 27 (Exp)
+    MINUS    reduzir usando a regra 27 (Exp)
+    $padrão  reduzir usando a regra 44 (Comando)
+
+
+Estado 67
+
+   49 FuncStm: DeclFunc OPAR ListaDeclFunc CPAR OKEY ListaComando • CKEY
+
+    CKEY  deslocar, e ir ao estado 92
+
+
+Estado 68
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   30 ListaExp: Exp • VIR ListaExp
+   31         | Exp •
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    VIR    deslocar, e ir ao estado 93
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 31 (ListaExp)
+
+
+Estado 69
+
+   47 FuncCall: ID OPAR ListaExp • CPAR ID OPAR CPAR
+
+    CPAR  deslocar, e ir ao estado 94
+
+
+Estado 70
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   28 Atr: ID ATR Exp •
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 28 (Atr)
+
+
+Estado 71
+
+   26 Exp: ID OB NUM • CB
+   29 Atr: ID OB NUM • CB ATR Exp
+
+    CB  deslocar, e ir ao estado 95
+
+
+Estado 72
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   34 Ifst: IF OPAR Exp • CPAR ComandoComposto ENDIF
+   35     | IF OPAR Exp • CPAR ComandoComposto ELSE ComandoComposto ENDIF
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    CPAR   deslocar, e ir ao estado 96
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 73
+
+   33 Fst: FOR OPAR ID • VIR Exp VIR Exp CPAR
+
+    VIR  deslocar, e ir ao estado 97
+
+
+Estado 74
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   32 Wst: WHILE OPAR Exp • CPAR ComandoComposto
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    CPAR   deslocar, e ir ao estado 98
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 75
+
+   26 Exp: ID OB • NUM CB
+
+    NUM  deslocar, e ir ao estado 99
+
+
+Estado 76
+
+   23 Exp: OPAR Exp CPAR •
+
+    $padrão  reduzir usando a regra 23 (Exp)
+
+
+Estado 77
+
+   27 Exp: FuncCall PV •
+
+    $padrão  reduzir usando a regra 27 (Exp)
+
+
+Estado 78
+
+    9 ListaID: ID VIR • ListaID
+
+    ID  deslocar, e ir ao estado 49
+
+    ListaID  ir ao estado 100
+    Atr      ir ao estado 101
+
+
+Estado 79
+
+   29 Atr: ID OB • NUM CB ATR Exp
+
+    NUM  deslocar, e ir ao estado 102
+
+
+Estado 80
+
+    4 Decl: Tipo Atr PV •
+
+    $padrão  reduzir usando a regra 4 (Decl)
+
+
+Estado 81
+
+   11 ListaID: Atr VIR • ListaID
+
+    ID  deslocar, e ir ao estado 49
+
+    ListaID  ir ao estado 103
+    Atr      ir ao estado 101
+
+
+Estado 82
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   15    | Exp AND Exp •
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 15 (Exp)
+
+
+Estado 83
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   16    | Exp OR Exp •
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    AND    deslocar, e ir ao estado 52
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 16 (Exp)
+
+
+Estado 84
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   21    | Exp EQ Exp •
+   22    | Exp • NEQ Exp
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 21 (Exp)
+
+
+Estado 85
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   18    | Exp LT Exp •
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 18 (Exp)
+
+
+Estado 86
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   19    | Exp LE Exp •
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 19 (Exp)
+
+
+Estado 87
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   17    | Exp GT Exp •
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 17 (Exp)
+
+
+Estado 88
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   20    | Exp GE Exp •
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 20 (Exp)
+
+
+Estado 89
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   22    | Exp NEQ Exp •
+
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 22 (Exp)
+
+
+Estado 90
+
+   13 Exp: Exp • PLUS Exp
+   13    | Exp PLUS Exp •
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    $padrão  reduzir usando a regra 13 (Exp)
+
+
+Estado 91
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   14    | Exp MINUS Exp •
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+
+    $padrão  reduzir usando a regra 14 (Exp)
+
+
+Estado 92
+
+   49 FuncStm: DeclFunc OPAR ListaDeclFunc CPAR OKEY ListaComando CKEY •
+
+    $padrão  reduzir usando a regra 49 (FuncStm)
+
+
+Estado 93
+
+   30 ListaExp: Exp VIR • ListaExp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 68
+    ListaExp  ir ao estado 104
+    FuncCall  ir ao estado 47
+
+
+Estado 94
+
+   47 FuncCall: ID OPAR ListaExp CPAR • ID OPAR CPAR
+
+    ID  deslocar, e ir ao estado 105
+
+
+Estado 95
+
+   26 Exp: ID OB NUM CB •
+   29 Atr: ID OB NUM CB • ATR Exp
+
+    ATR  deslocar, e ir ao estado 106
+
+    $padrão  reduzir usando a regra 26 (Exp)
+
+
+Estado 96
+
+   34 Ifst: IF OPAR Exp CPAR • ComandoComposto ENDIF
+   35     | IF OPAR Exp CPAR • ComandoComposto ELSE ComandoComposto ENDIF
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    OKEY   deslocar, e ir ao estado 107
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl             ir ao estado 28
+    Tipo             ir ao estado 29
+    Exp              ir ao estado 30
+    Atr              ir ao estado 31
+    Wst              ir ao estado 32
+    Fst              ir ao estado 33
+    Ifst             ir ao estado 34
+    Comando          ir ao estado 108
+    ComandoComposto  ir ao estado 109
+    FuncCall         ir ao estado 37
+
+
+Estado 97
+
+   33 Fst: FOR OPAR ID VIR • Exp VIR Exp CPAR
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 110
+    FuncCall  ir ao estado 47
+
+
+Estado 98
+
+   32 Wst: WHILE OPAR Exp CPAR • ComandoComposto
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    OKEY   deslocar, e ir ao estado 107
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl             ir ao estado 28
+    Tipo             ir ao estado 29
+    Exp              ir ao estado 30
+    Atr              ir ao estado 31
+    Wst              ir ao estado 32
+    Fst              ir ao estado 33
+    Ifst             ir ao estado 34
+    Comando          ir ao estado 108
+    ComandoComposto  ir ao estado 111
+    FuncCall         ir ao estado 37
+
+
+Estado 99
+
+   26 Exp: ID OB NUM • CB
+
+    CB  deslocar, e ir ao estado 112
+
+
+Estado 100
+
+    9 ListaID: ID VIR ListaID •
+
+    $padrão  reduzir usando a regra 9 (ListaID)
+
+
+Estado 101
+
+   11 ListaID: Atr • VIR ListaID
+   12        | Atr •
+
+    VIR  deslocar, e ir ao estado 81
+
+    $padrão  reduzir usando a regra 12 (ListaID)
+
+
+Estado 102
+
+   29 Atr: ID OB NUM • CB ATR Exp
+
+    CB  deslocar, e ir ao estado 113
+
+
+Estado 103
+
+   11 ListaID: Atr VIR ListaID •
+
+    $padrão  reduzir usando a regra 11 (ListaID)
+
+
+Estado 104
+
+   30 ListaExp: Exp VIR ListaExp •
+
+    $padrão  reduzir usando a regra 30 (ListaExp)
+
+
+Estado 105
+
+   47 FuncCall: ID OPAR ListaExp CPAR ID • OPAR CPAR
+
+    OPAR  deslocar, e ir ao estado 114
+
+
+Estado 106
+
+   29 Atr: ID OB NUM CB ATR • Exp
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 115
+    FuncCall  ir ao estado 47
+
+
+Estado 107
+
+   46 ComandoComposto: OKEY • ListaComando CKEY
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl          ir ao estado 28
+    Tipo          ir ao estado 29
+    Exp           ir ao estado 30
+    Atr           ir ao estado 31
+    Wst           ir ao estado 32
+    Fst           ir ao estado 33
+    Ifst          ir ao estado 34
+    ListaComando  ir ao estado 116
+    Comando       ir ao estado 36
+    FuncCall      ir ao estado 37
+
+
+Estado 108
+
+   45 ComandoComposto: Comando •
+
+    $padrão  reduzir usando a regra 45 (ComandoComposto)
+
+
+Estado 109
+
+   34 Ifst: IF OPAR Exp CPAR ComandoComposto • ENDIF
+   35     | IF OPAR Exp CPAR ComandoComposto • ELSE ComandoComposto ENDIF
+
+    ENDIF  deslocar, e ir ao estado 117
+    ELSE   deslocar, e ir ao estado 118
+
+
+Estado 110
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   33 Fst: FOR OPAR ID VIR Exp • VIR Exp CPAR
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    VIR    deslocar, e ir ao estado 119
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 111
+
+   32 Wst: WHILE OPAR Exp CPAR ComandoComposto •
+
+    $padrão  reduzir usando a regra 32 (Wst)
+
+
+Estado 112
+
+   26 Exp: ID OB NUM CB •
+
+    $padrão  reduzir usando a regra 26 (Exp)
+
+
+Estado 113
+
+   29 Atr: ID OB NUM CB • ATR Exp
+
+    ATR  deslocar, e ir ao estado 106
+
+
+Estado 114
+
+   47 FuncCall: ID OPAR ListaExp CPAR ID OPAR • CPAR
+
+    CPAR  deslocar, e ir ao estado 120
+
+
+Estado 115
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   29 Atr: ID OB NUM CB ATR Exp •
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+    $padrão  reduzir usando a regra 29 (Atr)
+
+
+Estado 116
+
+   46 ComandoComposto: OKEY ListaComando • CKEY
+
+    CKEY  deslocar, e ir ao estado 121
+
+
+Estado 117
+
+   34 Ifst: IF OPAR Exp CPAR ComandoComposto ENDIF •
+
+    $padrão  reduzir usando a regra 34 (Ifst)
+
+
+Estado 118
+
+   35 Ifst: IF OPAR Exp CPAR ComandoComposto ELSE • ComandoComposto ENDIF
+
+    NUM    deslocar, e ir ao estado 22
+    ID     deslocar, e ir ao estado 23
+    IF     deslocar, e ir ao estado 24
+    FOR    deslocar, e ir ao estado 25
+    WHILE  deslocar, e ir ao estado 26
+    INT    deslocar, e ir ao estado 1
+    FLOAT  deslocar, e ir ao estado 2
+    OPAR   deslocar, e ir ao estado 27
+    OKEY   deslocar, e ir ao estado 107
+    VOID   deslocar, e ir ao estado 3
+    CHAR   deslocar, e ir ao estado 4
+
+    Decl             ir ao estado 28
+    Tipo             ir ao estado 29
+    Exp              ir ao estado 30
+    Atr              ir ao estado 31
+    Wst              ir ao estado 32
+    Fst              ir ao estado 33
+    Ifst             ir ao estado 34
+    Comando          ir ao estado 108
+    ComandoComposto  ir ao estado 122
+    FuncCall         ir ao estado 37
+
+
+Estado 119
+
+   33 Fst: FOR OPAR ID VIR Exp VIR • Exp CPAR
+
+    NUM   deslocar, e ir ao estado 22
+    ID    deslocar, e ir ao estado 45
+    OPAR  deslocar, e ir ao estado 27
+
+    Exp       ir ao estado 123
+    FuncCall  ir ao estado 47
+
+
+Estado 120
+
+   47 FuncCall: ID OPAR ListaExp CPAR ID OPAR CPAR •
+
+    $padrão  reduzir usando a regra 47 (FuncCall)
+
+
+Estado 121
+
+   46 ComandoComposto: OKEY ListaComando CKEY •
+
+    $padrão  reduzir usando a regra 46 (ComandoComposto)
+
+
+Estado 122
+
+   35 Ifst: IF OPAR Exp CPAR ComandoComposto ELSE ComandoComposto • ENDIF
+
+    ENDIF  deslocar, e ir ao estado 124
+
+
+Estado 123
+
+   13 Exp: Exp • PLUS Exp
+   14    | Exp • MINUS Exp
+   15    | Exp • AND Exp
+   16    | Exp • OR Exp
+   17    | Exp • GT Exp
+   18    | Exp • LT Exp
+   19    | Exp • LE Exp
+   20    | Exp • GE Exp
+   21    | Exp • EQ Exp
+   22    | Exp • NEQ Exp
+   33 Fst: FOR OPAR ID VIR Exp VIR Exp • CPAR
+
+    AND    deslocar, e ir ao estado 52
+    OR     deslocar, e ir ao estado 53
+    EQ     deslocar, e ir ao estado 54
+    LT     deslocar, e ir ao estado 55
+    LE     deslocar, e ir ao estado 56
+    GT     deslocar, e ir ao estado 57
+    GE     deslocar, e ir ao estado 58
+    NEQ    deslocar, e ir ao estado 59
+    CPAR   deslocar, e ir ao estado 125
+    PLUS   deslocar, e ir ao estado 61
+    MINUS  deslocar, e ir ao estado 62
+
+
+Estado 124
+
+   35 Ifst: IF OPAR Exp CPAR ComandoComposto ELSE ComandoComposto ENDIF •
+
+    $padrão  reduzir usando a regra 35 (Ifst)
+
+
+Estado 125
+
+   33 Fst: FOR OPAR ID VIR Exp VIR Exp CPAR •
+
+    $padrão  reduzir usando a regra 33 (Fst)

@@ -80,7 +80,7 @@ extern int yydebug;
     ELSE = 281,                    /* ELSE  */
     PLUS = 282,                    /* PLUS  */
     MINUS = 283,                   /* MINUS  */
-    RTRN = 284,                    /* RTRN  */
+    RETURN = 284,                  /* RETURN  */
     NOT = 285,                     /* NOT  */
     PER = 286,                     /* PER  */
     AST = 287,                     /* AST  */
@@ -91,7 +91,9 @@ extern int yydebug;
     MULT = 292,                    /* MULT  */
     STRING = 293,                  /* STRING  */
     VOID = 294,                    /* VOID  */
-    CHAR = 295                     /* CHAR  */
+    CHAR = 295,                    /* CHAR  */
+    ARG_ARQ = 296,                 /* ARG_ARQ  */
+    PH = 297                       /* PH  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -126,7 +128,7 @@ extern int yydebug;
 #define ELSE 281
 #define PLUS 282
 #define MINUS 283
-#define RTRN 284
+#define RETURN 284
 #define NOT 285
 #define PER 286
 #define AST 287
@@ -138,6 +140,8 @@ extern int yydebug;
 #define STRING 293
 #define VOID 294
 #define CHAR 295
+#define ARG_ARQ 296
+#define PH 297
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
